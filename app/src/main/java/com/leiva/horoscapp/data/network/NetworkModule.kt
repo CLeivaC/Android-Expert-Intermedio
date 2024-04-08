@@ -2,7 +2,6 @@ package com.leiva.horoscapp.data.network
 
 import com.leiva.horoscapp.BuildConfig.BASE_URL
 import com.leiva.horoscapp.data.RepositoryImpl
-import com.leiva.horoscapp.data.core.interceptors.AuthInterceptor
 import com.leiva.horoscapp.domain.Repository
 import dagger.Module
 import dagger.Provides
@@ -30,13 +29,12 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(authInterceptor: AuthInterceptor):OkHttpClient{
+    fun provideOkHttpClient():OkHttpClient{
        val interceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
 
         return OkHttpClient
             .Builder()
             .addInterceptor(interceptor)
-            .addInterceptor(authInterceptor)
             .build()
     }
 
